@@ -85,30 +85,30 @@ const CategoryPage = () => {
                 {/* Main Content */}
                 <div className="flex-1 flex flex-col">
                     {/* Header */}
-                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                        <div className="flex items-center gap-4">
-                            <h1 className="text-2xl md:text-3xl font-black font-integral uppercase tracking-tight">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                        <div className="flex items-center gap-3 md:gap-4">
+                            <h1 className="text-[28px] md:text-3xl font-black font-integral uppercase tracking-tight truncate leading-tight">
                                 {activeStyle}
                             </h1>
                             <button 
                                 onClick={() => setShowMobileFilters(!showMobileFilters)}
-                                className="lg:hidden p-2 bg-[#F0F0F0] rounded-full"
+                                className="lg:hidden p-2.5 bg-[#F0F0F0] rounded-full hover:bg-black/5 transition-all text-black flex-shrink-0"
                             >
-                                <SlidersHorizontal size={20} />
+                                <SlidersHorizontal size={18} />
                             </button>
                         </div>
 
-                        <div className="flex items-center gap-4 text-black/60 text-sm md:text-base font-satoshi">
-                            <span>Showing 1-9 of {products.length * pagination.totalPages} Products</span>
-                            <div className="flex items-center gap-1 group cursor-pointer relative">
+                        <div className="flex items-center justify-between sm:justify-end gap-4 text-black/60 text-xs md:text-base font-satoshi w-full sm:w-auto border-t sm:border-t-0 pt-4 sm:pt-0 border-black/5">
+                            <span className="shrink-0">Showing 1-9 of {products.length * pagination.totalPages} Products</span>
+                            <div className="flex items-center gap-1 group cursor-pointer relative py-1">
                                 Sort by: <span className="text-black font-bold flex items-center gap-1">
-                                    {filters.sort === 'price-low' ? 'Price: Low' : filters.sort === 'price-high' ? 'Price: High' : 'Newest'}
-                                    <ChevronDown size={16} />
+                                    {filters.sort === 'price-low' ? 'Low' : filters.sort === 'price-high' ? 'High' : 'Newest'}
+                                    <ChevronDown size={14} />
                                 </span>
                                 <div className="absolute top-full right-0 mt-2 w-40 bg-white border border-black/10 rounded-xl shadow-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-20">
-                                    <button onClick={() => handleFilterChange({...filters, sort: 'newest'})} className="w-full text-left px-4 py-2 hover:bg-gray-50 text-black">Newest</button>
-                                    <button onClick={() => handleFilterChange({...filters, sort: 'price-low'})} className="w-full text-left px-4 py-2 hover:bg-gray-50 text-black">Price: Low</button>
-                                    <button onClick={() => handleFilterChange({...filters, sort: 'price-high'})} className="w-full text-left px-4 py-2 hover:bg-gray-50 text-black">Price: High</button>
+                                    <button onClick={() => handleFilterChange({...filters, sort: 'newest'})} className="w-full text-left px-4 py-2 hover:bg-gray-50 text-black text-sm">Newest Arrivals</button>
+                                    <button onClick={() => handleFilterChange({...filters, sort: 'price-low'})} className="w-full text-left px-4 py-2 hover:bg-gray-50 text-black text-sm">Price: Low to High</button>
+                                    <button onClick={() => handleFilterChange({...filters, sort: 'price-high'})} className="w-full text-left px-4 py-2 hover:bg-gray-50 text-black text-sm">Price: High to Low</button>
                                 </div>
                             </div>
                         </div>

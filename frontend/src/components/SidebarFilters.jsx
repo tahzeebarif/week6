@@ -24,7 +24,7 @@ const SidebarFilters = ({ filters, onFilterChange }) => {
   };
 
   return (
-    <div className="w-full bg-white border border-black/10 rounded-[20px] p-6 sticky top-24">
+    <div className="w-full bg-white border border-black/10 rounded-[20px] p-6 lg:sticky lg:top-24">
       <div className="flex justify-between items-center pb-6 border-b border-black/10 mb-6">
         <h2 className="text-xl font-bold font-satoshi">Filters</h2>
         <SlidersHorizontal size={20} className="text-black/40" />

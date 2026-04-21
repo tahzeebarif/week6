@@ -29,12 +29,8 @@ router.post('/', protect, async (req, res) => {
         return res.status(400).json({ success: false, message: 'Insufficient loyalty points' });
       }
       user.loyaltyPoints -= totalPoints;
-    } else {
-      // Earn 1 point for every $1 spent
-      user.loyaltyPoints += Math.floor(totalPrice);
+      await user.save();
     }
-
-    await user.save();
 
     const order = new Order({
       orderItems: orderItems.map((x) => ({

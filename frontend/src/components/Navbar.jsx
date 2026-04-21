@@ -6,14 +6,23 @@ import { useCart } from '../context/CartContext';
 
 const Navbar = () => {
   const [showBanner, setShowBanner] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, logout } = useAuth();
   const { totalItemsCount } = useCart();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
+    setIsMenuOpen(false);
     navigate('/');
   };
+
+  const navLinks = [
+    { name: 'Shop', path: '/', isDropdown: true },
+    { name: 'On Sale', path: '/#on-sale' },
+    { name: 'New Arrivals', path: '/#new-arrivals' },
+    { name: 'Brands', path: '/#brands' },
+  ];
 
   return (
     <header className="w-full font-satoshi relative z-50">
@@ -39,7 +48,10 @@ const Navbar = () => {
         
         {/* Left Section: Logo & Links */}
         <div className="flex items-center gap-4 lg:gap-10">
-          <button className="lg:hidden text-black p-0 bg-transparent py-1 pe-1 border-none cursor-pointer flex items-center justify-center">
+          <button 
+            onClick={() => setIsMenuOpen(true)}
+            className="lg:hidden text-black p-0 bg-transparent py-1 pe-1 border-none cursor-pointer flex items-center justify-center"
+          >
              <Menu size={24} strokeWidth={2} />
           </button>
           <Link to="/" className="font-integral font-black text-2xl md:text-[32px] tracking-tight text-black no-underline pb-1">
@@ -47,26 +59,16 @@ const Navbar = () => {
           </Link>
           
           <ul className="hidden lg:flex items-center gap-6 m-0 p-0 list-none">
-            <li>
-              <Link to="/" className="text-black font-normal text-[16px] flex items-center gap-1 hover:text-gray-600 transition-colors no-underline">
-                Shop <ChevronDown size={16} strokeWidth={2} />
-              </Link>
-            </li>
-            <li>
-              <Link to="/#on-sale" className="text-black font-normal text-[16px] hover:text-gray-600 transition-colors no-underline">
-                On Sale
-              </Link>
-            </li>
-            <li>
-              <Link to="/#new-arrivals" className="text-black font-normal text-[16px] hover:text-gray-600 transition-colors no-underline">
-                New Arrivals
-              </Link>
-            </li>
-            <li>
-              <Link to="/#brands" className="text-black font-normal text-[16px] hover:text-gray-600 transition-colors no-underline">
-                Brands
-              </Link>
-            </li>
+            {navLinks.map((link) => (
+              <li key={link.name}>
+                <Link 
+                  to={link.path} 
+                  className="text-black font-normal text-[16px] flex items-center gap-1 hover:text-gray-600 transition-colors no-underline"
+                >
+                  {link.name} {link.isDropdown && <ChevronDown size={16} strokeWidth={2} />}
+                </Link>
+              </li>
+            ))}
 
             {user && (
               <li>
@@ -147,6 +149,117 @@ const Navbar = () => {
           )}
         </div>
       </nav>
+
+      {/* Mobile Menu Drawer */}
+      <div 
+        className={`fixed inset-0 z-[100] lg:hidden transition-all duration-300 ${isMenuOpen ? 'visible opacity-100' : 'invisible opacity-0'}`}
+      >
+        {/* Backdrop */}
+        <div 
+          className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+          onClick={() => setIsMenuOpen(false)}
+        ></div>
+        
+        {/* Drawer */}
+        <aside 
+          className={`absolute left-0 top-0 bottom-0 w-[80%] max-w-[300px] bg-white transition-transform duration-300 flex flex-col ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}
+        >
+          <div className="p-6 border-b border-black/5 flex items-center justify-between">
+            <Link to="/" onClick={() => setIsMenuOpen(false)} className="font-integral font-black text-2xl tracking-tight text-black no-underline">
+              SHOP.CO
+            </Link>
+            <button 
+              onClick={() => setIsMenuOpen(false)}
+              className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+            >
+              <X size={24} />
+            </button>
+          </div>
+          
+          <div className="flex-1 overflow-y-auto p-6">
+            <ul className="flex flex-col gap-6 m-0 p-0 list-none">
+              {navLinks.map((link) => (
+                <li key={link.name}>
+                  <Link 
+                    to={link.path} 
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-black font-bold text-lg flex items-center justify-between hover:text-gray-600 transition-colors no-underline"
+                  >
+                    {link.name} {link.isDropdown && <ChevronDown size={20} />}
+                  </Link>
+                </li>
+              ))}
+
+              <div className="h-px bg-black/5 my-2"></div>
+
+              {user && (
+                <li>
+                  <Link 
+                    to="/orders" 
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-black font-bold text-lg hover:text-gray-600 transition-colors no-underline"
+                  >
+                    My Orders
+                  </Link>
+                </li>
+              )}
+              
+              {/* Admin Links */}
+              {(user?.role === 'admin' || user?.role === 'super-admin') && (
+                <li>
+                  <Link 
+                    to="/admin" 
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-indigo-600 font-bold text-lg flex items-center gap-2 hover:text-indigo-800 transition-colors no-underline"
+                  >
+                    <LayoutDashboard size={20} /> Admin Panel
+                  </Link>
+                </li>
+              )}
+              
+              {/* Super Admin Links */}
+              {user?.role === 'super-admin' && (
+                <li>
+                  <Link 
+                    to="/super-admin" 
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-red-600 font-bold text-lg flex items-center gap-2 hover:text-red-800 transition-colors no-underline"
+                  >
+                     <Settings size={20} /> Management
+                  </Link>
+                </li>
+              )}
+            </ul>
+          </div>
+
+          {!user && (
+             <div className="p-6 border-t border-black/5">
+                <Link 
+                  to="/login" 
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block w-full bg-black text-white text-center font-bold py-4 rounded-full hover:bg-black/90 transition-all"
+                >
+                  Login / Sign Up
+                </Link>
+             </div>
+          )}
+
+          {user && (
+             <div className="p-6 border-t border-black/5 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden border border-black/10">
+                   {user.avatar ? <img src={user.avatar} className="w-full h-full object-cover" alt="User" /> : <CircleUser size={28} />}
+                </div>
+                <div className="flex-1 min-w-0">
+                   <p className="font-bold text-black truncate">{user.name}</p>
+                   <p className="text-xs text-black/40 truncate">{user.email}</p>
+                </div>
+                <button onClick={handleLogout} className="text-red-500 p-2 hover:bg-red-50 rounded-full transition-colors">
+                   <LogOut size={20} />
+                </button>
+             </div>
+          )}
+        </aside>
+      </div>
     </header>
   );
 };

@@ -11,7 +11,7 @@ const Cart = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const handleCheckout = async () => {
+  const handleCheckout = () => {
     if (!user) {
       alert('Please login to checkout');
       navigate('/login');
@@ -23,38 +23,7 @@ const Cart = () => {
       return;
     }
 
-    setLoading(true);
-    try {
-      const orderData = {
-        orderItems: cartItems.map(item => ({
-          name: item.name,
-          qty: item.qty,
-          image: item.image,
-          price: item.price,
-          product: item.id
-        })),
-        shippingAddress: {
-          address: 'Default Address', // Would normally come from a form
-          city: 'Default City',
-          postalCode: '12345',
-          country: 'Default Country'
-        },
-        paymentMethod: 'Credit Card',
-        itemsPrice: subtotal,
-        taxPrice: tax,
-        shippingPrice: deliveryFee,
-        totalPrice: total
-      };
-
-      await createOrder(orderData);
-      alert('Order placed successfully!');
-      clearCart();
-      navigate('/');
-    } catch (err) {
-      alert(err.response?.data?.message || 'Failed to place order');
-    } finally {
-      setLoading(false);
-    }
+    navigate('/checkout');
   };
 
   if (cartItems.length === 0) {
@@ -87,41 +56,41 @@ const Cart = () => {
 
       <div className="flex flex-col lg:flex-row gap-5">
         {/* Cart Items List */}
-        <div className="flex-1 bg-white border border-black/10 rounded-[20px] p-4 md:p-6 space-y-6">
+        <div className="flex-1 bg-white border border-black/10 rounded-[20px] p-4 sm:p-6 space-y-6">
           {cartItems.map((item, idx) => (
-            <div key={`${item.id}-${item.color}-${item.size}`} className={`flex gap-4 pb-6 ${idx !== cartItems.length - 1 ? 'border-b border-black/10' : ''}`}>
+            <div key={`${item.id}-${item.color}-${item.size}`} className={`flex gap-3 sm:gap-4 pb-6 ${idx !== cartItems.length - 1 ? 'border-b border-black/10' : ''}`}>
               {/* Product Image */}
-              <div className="w-24 h-32 md:w-32 md:h-32 bg-[#F0EEED] rounded-xl overflow-hidden flex-shrink-0">
+              <div className="w-[100px] h-[100px] sm:w-32 sm:h-32 bg-[#F0EEED] rounded-xl overflow-hidden flex-shrink-0">
                 <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
               </div>
 
               {/* Product Details */}
-              <div className="flex-1 flex flex-col justify-between">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className="font-bold text-base md:text-xl font-satoshi mb-0.5">{item.name}</h3>
-                    <p className="text-xs md:text-sm text-black/60">Size: <span className="text-black">{item.size}</span></p>
-                    <p className="text-xs md:text-sm text-black/60">Color: <span className="text-black">{item.color}</span></p>
+              <div className="flex-1 flex flex-col justify-between min-w-0">
+                <div className="flex justify-between items-start gap-2">
+                  <div className="min-w-0">
+                    <h3 className="font-bold text-base sm:text-lg md:text-xl font-satoshi mb-0.5 truncate">{item.name}</h3>
+                    <p className="text-[10px] sm:text-xs md:text-sm text-black/60">Size: <span className="text-black">{item.size}</span></p>
+                    <p className="text-[10px] sm:text-xs md:text-sm text-black/60">Color: <span className="text-black">{item.color}</span></p>
                   </div>
                   <button 
                     onClick={() => removeFromCart(item.id, item.color, item.size)}
-                    className="text-red-500 hover:text-red-700 transition-colors"
+                    className="text-red-500 hover:text-red-700 transition-colors p-1"
                   >
-                    <Trash2 size={20} />
+                    <Trash2 size={18} />
                   </button>
                 </div>
 
                 <div className="flex justify-between items-end mt-2">
-                  <span className="text-xl md:text-2xl font-bold font-satoshi">${item.price}</span>
+                  <span className="text-lg sm:text-xl md:text-2xl font-bold font-satoshi">${item.price}</span>
                   
                   {/* Quantity Selector */}
-                  <div className="flex items-center justify-between w-[100px] md:w-[120px] bg-[#F0F0F0] rounded-full py-2 px-4 md:py-3 md:px-5">
+                  <div className="flex items-center justify-between w-[90px] sm:w-[120px] bg-[#F0F0F0] rounded-full py-2 px-3 sm:py-3 sm:px-5">
                     <button onClick={() => updateQty(item.id, item.color, item.size, item.qty - 1)} className="text-black hover:scale-110 transition-all font-bold">
-                      <Minus size={16} />
+                      <Minus size={14} />
                     </button>
-                    <span className="font-bold text-sm md:text-base font-satoshi">{item.qty}</span>
+                    <span className="font-bold text-xs sm:text-base font-satoshi">{item.qty}</span>
                     <button onClick={() => updateQty(item.id, item.color, item.size, item.qty + 1)} className="text-black hover:scale-110 transition-all font-bold">
-                      <Plus size={16} />
+                      <Plus size={14} />
                     </button>
                   </div>
                 </div>

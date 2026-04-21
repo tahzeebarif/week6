@@ -132,7 +132,12 @@ const MyOrders = () => {
                                             
                                             <div className="pt-4 border-t border-black/5 mt-4">
                                                 <h5 className="text-[10px] font-bold text-black/40 uppercase tracking-widest mb-2">Payment</h5>
-                                                <p className="text-xs font-bold text-black opacity-80 uppercase">{order.paymentMethod}</p>
+                                                <div className="flex items-center gap-2">
+                                                   <p className="text-xs font-bold text-black opacity-80 uppercase">{order.paymentMethod}</p>
+                                                   <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${order.paymentStatus === 'Success' ? 'bg-emerald-100 text-emerald-700' : order.paymentStatus === 'Failed' ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-700'}`}>
+                                                       {order.paymentStatus || 'Pending'}
+                                                   </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

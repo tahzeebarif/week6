@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 const StyleCard = ({ title, image, className }) => (
   <Link 
     to={`/shop?style=${title}`}
-    className={`relative h-[190px] md:h-[289px] bg-white rounded-[20px] overflow-hidden group cursor-pointer block ${className}`}
+    className={`relative h-[190px] sm:h-[240px] md:h-[289px] bg-white rounded-[20px] overflow-hidden group cursor-pointer block transition-all hover:shadow-lg ${className}`}
   >
-    <h3 className="absolute left-6 top-6 md:left-9 md:top-7 font-satoshi font-bold text-2xl md:text-[36px] text-black z-10">
+    <h3 className="absolute left-6 top-6 sm:left-8 sm:top-8 md:left-9 md:top-7 font-satoshi font-bold text-2xl sm:text-3xl md:text-[36px] text-black z-10 uppercase tracking-tight">
       {title}
     </h3>
     <img 
       src={image} 
       alt={title} 
-      className="absolute inset-0 w-full h-full object-cover md:object-right-top transition-transform duration-500 group-hover:scale-110"
+      className="absolute inset-0 w-full h-full object-cover md:object-right-top transition-transform duration-700 group-hover:scale-110"
     />
   </Link>
 );

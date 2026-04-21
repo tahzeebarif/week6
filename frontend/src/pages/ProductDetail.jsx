@@ -154,9 +154,9 @@ const ProductDetail = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14">
         {/* Gallery Section */}
-        <div className="flex flex-col md:flex-row-reverse gap-4">
+        <div className="flex flex-col lg:flex-row-reverse gap-4 md:gap-5">
           {/* Main Image */}
-          <div className="flex-1 bg-[#F0EEED] rounded-[20px] aspect-square overflow-hidden">
+          <div className="flex-1 bg-[#F0EEED] rounded-[20px] aspect-[4/5] sm:aspect-square overflow-hidden">
             <img 
               src={images[selectedImage] || displayedImage} 
               alt={product.name} 
@@ -165,12 +165,12 @@ const ProductDetail = () => {
           </div>
 
           {/* Thumbnails */}
-          <div className="flex md:flex-col gap-3 md:w-[150px] overflow-x-auto md:overflow-y-visible hide-scrollbar">
+          <div className="flex lg:flex-col gap-3 min-w-0 lg:w-[150px] overflow-x-auto lg:overflow-y-visible hide-scrollbar pb-2 lg:pb-0">
             {images.map((img, idx) => (
               <div 
                 key={idx}
                 onClick={() => setSelectedImage(idx)}
-                className={`flex-shrink-0 w-24 md:w-full aspect-square bg-[#F0EEED] rounded-[20px] overflow-hidden cursor-pointer border-2 transition-all ${selectedImage === idx ? 'border-black' : 'border-transparent hover:border-black/20'}`}
+                className={`flex-shrink-0 w-24 sm:w-28 lg:w-full aspect-square bg-[#F0EEED] rounded-[20px] overflow-hidden cursor-pointer border-2 transition-all ${selectedImage === idx ? 'border-black' : 'border-transparent hover:border-black/20'}`}
               >
                 <img 
                   src={img} 

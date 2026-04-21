@@ -22,11 +22,11 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#F0F0F0] pt-40 pb-10 relative mt-32 md:mt-48">
+    <footer className="bg-[#F0F0F0] pt-48 md:pt-40 pb-10 relative mt-32 md:mt-48">
       
       {/* Newsletter Subscription Bar - Overlapping the top */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100%-32px)] max-w-[1240px] bg-black rounded-[20px] px-6 py-9 md:px-16 md:py-11 flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-8 z-20">
-        <h2 className="font-integral font-extrabold text-[28px] sm:text-[32px] md:text-[40px] text-white leading-[1.1] max-w-[550px] text-center lg:text-left uppercase">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100%-32px)] max-w-[1240px] bg-black rounded-[20px] px-6 py-8 md:px-16 md:py-11 flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-8 z-20">
+        <h2 className="font-integral font-extrabold text-[28px] sm:text-[32px] md:text-[40px] text-white leading-tight max-w-[550px] text-center lg:text-left uppercase">
           STAY UP TO DATE ABOUT OUR LATEST OFFERS
         </h2>
         
@@ -36,28 +36,28 @@ const Footer = () => {
             <input 
               type="email" 
               placeholder="Enter your email address" 
-              className="w-full bg-white rounded-full py-3 px-12 text-black text-sm md:text-base font-satoshi placeholder:text-black/40 outline-none"
+              className="w-full bg-white rounded-full py-3.5 px-12 text-black text-sm md:text-base font-satoshi placeholder:text-black/40 outline-none"
             />
           </div>
-          <button className="w-full bg-white text-black font-satoshi font-medium py-3 rounded-full hover:bg-white/90 transition-all active:scale-95 leading-none text-sm md:text-base">
+          <button className="w-full bg-white text-black font-satoshi font-bold py-3.5 rounded-full hover:bg-white/90 transition-all active:scale-95 leading-none text-sm md:text-base">
             Subscribe to Newsletter
           </button>
         </div>
       </div>
 
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-y-12 gap-x-8 mb-12 md:mb-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-y-10 gap-x-6 sm:gap-x-8 mb-12 md:mb-20">
           {/* Brand Info */}
-          <div className="col-span-2 lg:col-span-1">
-            <h2 className="font-integral font-extrabold text-[28px] md:text-[32px] text-black mb-6 uppercase tracking-tighter">
+          <div className="col-span-2 lg:col-span-1 flex flex-col items-center md:items-start text-center md:text-left">
+            <h2 className="font-integral font-extrabold text-[28px] md:text-[32px] text-black mb-4 md:mb-6 uppercase tracking-tighter">
               SHOP.CO
             </h2>
-            <p className="text-black/60 font-satoshi text-sm md:text-base leading-relaxed mb-8 max-w-[248px]">
+            <p className="text-black/60 font-satoshi text-sm md:text-base leading-relaxed mb-6 md:mb-8 max-w-[248px]">
               We have clothes that suits your style and which you're proud to wear. From women to men.
             </p>
             <div className="flex items-center gap-x-3">
               {socialIcons.map((item, idx) => (
-                <a key={idx} href="/" className="w-7 h-7 flex items-center justify-center rounded-full border border-black/10 bg-white hover:bg-black hover:text-white transition-all">
+                <a key={idx} href="/" className="w-8 h-8 flex items-center justify-center rounded-full border border-black/10 bg-white hover:bg-black hover:text-white transition-all">
                   {item.svg}
                 </a>
               ))}
@@ -65,9 +65,9 @@ const Footer = () => {
           </div>
 
           {/* Footer Links */}
-          <div className="flex flex-col gap-6">
-            <h4 className="font-satoshi font-bold text-black uppercase tracking-widest text-sm md:text-base">Company</h4>
-            <ul className="flex flex-col gap-4 text-black/60 font-satoshi text-sm md:text-base">
+          <div className="flex flex-col gap-4 md:gap-6 pt-2">
+            <h4 className="font-satoshi font-bold text-black uppercase tracking-widest text-xs md:text-base">Company</h4>
+            <ul className="flex flex-col gap-3 md:gap-4 text-black/60 font-satoshi text-sm md:text-base">
               <li><a href="/" className="hover:text-black transition-colors">About</a></li>
               <li><a href="/" className="hover:text-black transition-colors">Features</a></li>
               <li><a href="/" className="hover:text-black transition-colors">Works</a></li>
@@ -75,9 +75,9 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="flex flex-col gap-6">
-            <h4 className="font-satoshi font-bold text-black uppercase tracking-widest text-sm md:text-base">Help</h4>
-            <ul className="flex flex-col gap-4 text-black/60 font-satoshi text-sm md:text-base">
+          <div className="flex flex-col gap-4 md:gap-6 pt-2">
+            <h4 className="font-satoshi font-bold text-black uppercase tracking-widest text-xs md:text-base">Help</h4>
+            <ul className="flex flex-col gap-3 md:gap-4 text-black/60 font-satoshi text-sm md:text-base">
               <li><a href="/" className="hover:text-black transition-colors">Customer Support</a></li>
               <li><a href="/" className="hover:text-black transition-colors">Delivery Details</a></li>
               <li><a href="/" className="hover:text-black transition-colors">Terms & Conditions</a></li>
@@ -85,9 +85,9 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="flex flex-col gap-6">
-            <h4 className="font-satoshi font-bold text-black uppercase tracking-widest text-sm md:text-base">FAQ</h4>
-            <ul className="flex flex-col gap-4 text-black/60 font-satoshi text-sm md:text-base">
+          <div className="flex flex-col gap-4 md:gap-6 pt-2">
+            <h4 className="font-satoshi font-bold text-black uppercase tracking-widest text-xs md:text-base">FAQ</h4>
+            <ul className="flex flex-col gap-3 md:gap-4 text-black/60 font-satoshi text-sm md:text-base">
               <li><a href="/" className="hover:text-black transition-colors">Account</a></li>
               <li><a href="/" className="hover:text-black transition-colors">Manage Deliveries</a></li>
               <li><a href="/" className="hover:text-black transition-colors">Orders</a></li>
@@ -95,9 +95,9 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="flex flex-col gap-6">
-            <h4 className="font-satoshi font-bold text-black uppercase tracking-widest text-sm md:text-base">Resources</h4>
-            <ul className="flex flex-col gap-4 text-black/60 font-satoshi text-sm md:text-base">
+          <div className="flex flex-col gap-4 md:gap-6 pt-2">
+            <h4 className="font-satoshi font-bold text-black uppercase tracking-widest text-xs md:text-base">Resources</h4>
+            <ul className="flex flex-col gap-3 md:gap-4 text-black/60 font-satoshi text-sm md:text-base">
               <li><a href="/" className="hover:text-black transition-colors">Free eBooks</a></li>
               <li><a href="/" className="hover:text-black transition-colors">Development Tutorial</a></li>
               <li><a href="/" className="hover:text-black transition-colors">How to - Blog</a></li>
@@ -107,7 +107,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 border-t border-black/10 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="pt-6 border-t border-black/10 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4 text-center md:text-left">
           <p className="text-black/60 font-satoshi text-sm">
             Shop.co © 2000-2023, All Rights Reserved
           </p>

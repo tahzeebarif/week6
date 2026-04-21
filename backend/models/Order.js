@@ -28,7 +28,15 @@ const orderSchema = new mongoose.Schema({
   paymentMethod: {
     type: String,
     required: true,
-    default: 'PayPal',
+    default: 'Stripe', // Changed default to Stripe
+  },
+  paymentStatus: {
+    type: String,
+    enum: ['Pending', 'Success', 'Failed'],
+    default: 'Pending',
+  },
+  transactionId: {
+    type: String, // Stripe PaymentIntent ID
   },
   paymentResult: {
     id: { type: String },
